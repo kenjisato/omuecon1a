@@ -1,0 +1,39 @@
+Package: omuecon1a
+Type: Package
+Title: Seminar Matching App for the Department of Economics OMU
+Version: 0.1.0
+Authors@R: 
+    person("Kenji", "Sato", , "kenji@kenjisato.jp", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0009-0000-4520-2560"))
+Description: This is probably not what you might want to use!
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    pkgload,
+    shinytest2,
+    testthat (>= 3.0.0)
+Imports: 
+    bslib,
+    dplyr,
+    DT,
+    ggplot2,
+    juicedown,
+    knitr,
+    matchingR,
+    purrr,
+    readr,
+    readxl,
+    rlang,
+    shiny,
+    shinyalert,
+    shinyFiles,
+    shinyjs,
+    shinyStorePlus,
+    tibble,
+    tidyr,
+    whisker,
+    xfun,
+    yaml
+RoxygenNote: 7.3.1
+Config/testthat/edition: 3

@@ -1,0 +1,52 @@
+admin:
+  fcid: ID
+  fcname: 教員名
+  stid: ID
+  stname: 氏名
+  gpa: GPA
+  classid: 授業コード
+seminar_meta:
+  sh_opt: 設定
+  sh_opt_col: チェック
+  sh_opt_rng: "B2:C3"
+  sh_eval: 評価
+seminar:
+  stid: ID
+  stname: 氏名
+  point: 評価
+  memo: メモ
+student:
+  fcname: 教員名
+  rank: 希望順位
+  memo: メモ
+match:
+  student: Student
+  seminar: Seminar
+main:
+  stid_name: ID_Name
+  stname: 学生氏名
+  fcname: 教員氏名
+  num: 通番
+notfull:
+  seminar: 担当教員
+  openslots: 空き枠
+moodle:
+  stid: 学籍番号
+  seminar: 配属ゼミ
+wide:
+  num: 通番
+stat:
+  rank: Rank
+  numranked: NumRanked
+change:
+  student: Student
+  seminar: Seminar
+  name: Name
+gakuen:
+  stid: 学籍番号
+  label: 進級区分
+  label0: 進級見込区分
+  code: 2
+registration:
+  stid: 学籍番号
+  classid: 授業コード

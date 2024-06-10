@@ -1,0 +1,18 @@
+
+the$student$name -> cols$student$fcname
+the$student$rank -> cols$student$rank
+
+the$faculty$id -> cols$seminar$stid
+the$faculty$eval -> cols$seminar$point
+the$faculty$sh_opt -> cols$seminar_meta$sh_opt
+the$faculty$sh_eval -> cols$seminar_meta$sh_eval
+the$faculty$sh_opt_col -> cols$seminar_meta$sh_opt_col
+the$faculty$sh_opt_range -> cols$seminar_meta$sh_opt_rng
+
+the$admin_fc$id -> cols$admin$fcid
+the$admin_fc$name -> cols$admin$fcname
+
+the$admin_st$id -> cols$admin$stid
+the$admin_st$name -> cols$admin$stname
+the$admin_st$gpa -> cols$admin$gpa
+
