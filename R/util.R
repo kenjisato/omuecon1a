@@ -10,7 +10,8 @@ path_exists <- function(path) {
   if (file.exists(path)) {
     path
   } else {
-    warning("File/directory does not exist: ", path)
+    warning("File/directory does not exist: ", path,
+            immediate. = TRUE)
     NULL
   }
 }
