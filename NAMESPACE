@@ -3,6 +3,7 @@
 export(last_n)
 export(matching_compute)
 export(matching_utils)
+export(prep)
 export(up)
 import(bslib)
 import(shiny)
