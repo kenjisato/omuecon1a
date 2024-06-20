@@ -26,10 +26,7 @@ appid <- function() {
 up <- function(...) {
   app_title <- "OMUEcon 専門演習 1A"
   app_theme <-
-    bs_theme(version = "5", preset = "united") |>
-    bslib::bs_add_rules(
-      ".navbar.navbar-default { background-color: $secondary !important; }"
-    )
+    bs_theme(version = "5", preset = "yeti")
 
   pageUi <- page_navbar(
     title = app_title,
@@ -49,6 +46,7 @@ up <- function(...) {
   pageServer <- function(input, output, session) {
     # rv <- reactiveValues()
 
+    #bslib::bs_themer()
     mainServer(rv)
     options_server(rv, input, output, session)
 
