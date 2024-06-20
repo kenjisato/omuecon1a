@@ -8,7 +8,8 @@ step4_ui <- function() {
           "必要ファイル",
           action_ui_rdsfile("step3", step = 3),
           p("進級判定資料（データ）"),
-          choose_file_ui("gakuen-xlsx", "選択", "成績データ（GAKUEN）"),
+          choose_file_ui("gakuen-xlsx", "選択", "成績データ（GAKUEN）",
+                         value = path_exists(the$cfg[["gakuen-xlsx"]])),
           checkboxInput(ns("mikomi"), "見込判定で動作確認する", FALSE)
         ),
         accordion_panel(
@@ -24,11 +25,11 @@ step4_ui <- function() {
       layout_columns(
         card(
           card_header("配属一覧", class = "bg-light"),
-          DT::dataTableOutput(ns("match-result"))
+          DT::dataTableOutput(ns("match-result")) |> shinycssloaders::withSpinner()
         ),
         card(
           card_header("空きゼミ一覧", class = "bg-light"),
-          DT::dataTableOutput(ns("open-slots"))
+          DT::dataTableOutput(ns("open-slots")) |> shinycssloaders::withSpinner()
         ),
         col_widths = c(6, 6), height = "300px"
       )

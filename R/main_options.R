@@ -9,24 +9,26 @@ option_ui <- function() {
         p("初回用"),
         choose_file_ui("step2-template", "選択",
           msg = "【初回】Moodle公開用テンプレート",
-          value = "step2_template.Rmd"
+          value = the$cfg[["step2-template"]] %||% "step2_template.Rmd"
         ),
         p("更新版"),
         choose_file_ui("step3-template", "選択",
           msg = "【更新】Moodle公開用テンプレート",
-          value = "step3_template.Rmd"
+          value = the$cfg[["step3-template"]] %||% "step3_template.Rmd"
         ),
         p("確定版"),
         choose_file_ui("step4-template", "選択",
           msg = "【確定】Moodle公開用テンプレート",
-          value = "step4_template.Rmd"
+          value = the$cfg[["step4-template"]] %||% "step4_template.Rmd"
         )
       ),
       div_(
         fill = FALSE,
         h5("Advanced"),
-        textInput("random-seed", label = "乱数シード", value = 12345, width = "100%"),
-        textInput("digits", label = "学番桁数", value = 8, width = "100%")
+        textInput("random-seed", label = "乱数シード",
+                  value = the$cfg[["random-seed"]] %||% 12345, width = "100%"),
+        textInput("digits", label = "学番桁数",
+                  value = the$cfg$digits %||% 8, width = "100%")
       ),
       div_(
         fill = FALSE,

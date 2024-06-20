@@ -28,6 +28,7 @@ Imports:
     rlang,
     shiny,
     shinyalert,
+    shinycssloaders,
     shinyFiles,
     shinyjs,
     shinyStorePlus,

@@ -23,7 +23,11 @@ choose_dir <- function(caption = "select a directory") {
 #'
 prep <- function(dir = format(Sys.Date(), "matching%y"), parent = NULL) {
 
-  parent <- if (is.null(parent)) choose_dir()
+  parent <- if (is.null(parent)) {
+    choose_dir()
+  } else {
+    normalizePath(parent)
+  }
   if (is.null(parent)) {
     stop("parent is not specified.")
   }
@@ -41,6 +45,15 @@ prep <- function(dir = format(Sys.Date(), "matching%y"), parent = NULL) {
   file.copy(pkg_file("project"), tdir, recursive = TRUE)
   file.rename(file.path(tdir, "project", "omuecon1a.Rproj"),
               file.path(tdir, "project", xfun::with_ext(dir, "Rproj")))
+
+  writeLines(
+    whisker::whisker.render(
+      readLines(pkg_file("project", "project.yml")),
+      list(project_dir = to)
+    ),
+    con = file.path(tdir, "project", "project.yml")
+  )
+
   file.rename(file.path(tdir, "project"), file.path(tdir, dir))
 
   file.copy(file.path(tdir, dir), parent, recursive = TRUE)

@@ -18,15 +18,17 @@ appid <- function() {
 
 #' Launch shiny app
 #'
-#' @param ... Not used yet.
+#' @param config character. path to config file, read by `read_config()`.
 #'
 #' @return Launch the shiny app.
 #' @export
 #'
-up <- function(...) {
+up <- function(config = NULL) {
   app_title <- "OMUEcon 専門演習 1A"
   app_theme <-
     bs_theme(version = "5", preset = "yeti")
+
+  read_config(config)
 
   pageUi <- page_navbar(
     title = app_title,

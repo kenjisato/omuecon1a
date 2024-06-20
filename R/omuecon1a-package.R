@@ -9,6 +9,7 @@
 ## usethis namespace: start
 #' @importFrom rlang :=
 #' @importFrom rlang .data
+#' @importFrom rlang %||%
 #' @importFrom shinyFiles shinyDirChoose
 ## usethis namespace: end
 NULL

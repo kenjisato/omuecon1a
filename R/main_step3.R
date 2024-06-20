@@ -12,7 +12,8 @@ step3_ui <- function() {
             action_ui_rdsfile("step2", step = 2),
             p("配属変更 希望者リスト"),
             choose_file_ui("change-xlsx", "選択",
-                           "配属変更表を選択してください。")
+                           "配属変更表を選択してください。",
+                           value = path_exists(the$cfg[["change-xlsx"]]))
           ),
           accordion_panel(
             "チェックリスト",
@@ -27,12 +28,12 @@ step3_ui <- function() {
         layout_columns(
           card(
             card_header("配属一覧", class = "bg-light"),
-            DT::dataTableOutput(ns("match-result")),
+            DT::dataTableOutput(ns("match-result")) |> shinycssloaders::withSpinner(),
             full_screen = TRUE
           ),
           card(
             card_header("空きゼミ一覧", class = "bg-light"),
-            DT::dataTableOutput(ns("open-slots")),
+            DT::dataTableOutput(ns("open-slots")) |> shinycssloaders::withSpinner(),
             full_screen = TRUE
           ),
           col_widths = c(6, 6), height = "300px"

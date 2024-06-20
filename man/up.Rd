@@ -4,10 +4,10 @@
 \alias{up}
 \title{Launch shiny app}
 \usage{
-up(...)
+up(config = NULL)
 }
 \arguments{
-\item{...}{Not used yet.}
+\item{config}{character. path to config file, read by `read_config()`.}
 }
 \value{
 Launch the shiny app.

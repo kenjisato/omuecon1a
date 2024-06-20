@@ -7,9 +7,11 @@ step1_ui <- function() {
     div_(
       h5("事務管理データ"),
       p("ゼミ一覧"),
-      choose_file_ui("faculty-list", "選択", "ゼミ一覧のファイルを選んでください。"),
+      choose_file_ui("faculty-list", "選択", "ゼミ一覧のファイルを選んでください。",
+                     value = path_exists(the$cfg[["faculty-list"]])),
       p("学生一覧"),
-      choose_file_ui("students-list", "選択", "対象学生一覧のファイルを選んでください。")
+      choose_file_ui("students-list", "選択", "対象学生一覧のファイルを選んでください。",
+                     value = path_exists(the$cfg[["students-list"]]))
     ),
     div_(
       h5("教員提出データ"),
@@ -77,7 +79,7 @@ step1_server <- function(id = "step1",  files) {
       if (length(msg) == 0) {
         showModal(
           modalDialog(
-            "You're good to go!",
+            "検証が完了しました。",
             size = "l"
           )
         )
@@ -117,7 +119,7 @@ step1_server <- function(id = "step1",  files) {
       if (length(msg) == 0) {
         showModal(
           modalDialog(
-            "You're good to go!",
+            "検証が完了しました。",
             size = "l"
           )
         )

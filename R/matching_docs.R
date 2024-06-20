@@ -28,18 +28,11 @@ match_table <- function(util, result, students_xlsx, faculty_xlsx) {
     dplyr::ungroup() |>
     dplyr::select(-!!cols$admin$gpa)
 
-  df$notfull <-
-    tibble::tibble(
-      !!cols$notfull$seminar := rownames(util[[cols$match$student]])[result$unmatched.colleges]
-    ) |>
-    dplyr::group_by(.data[[cols$notfull$seminar]]) |>
-    dplyr::summarize(!!cols$notfull$openslots := dplyr::n()) |>
-    dplyr::ungroup() |>
-    dplyr::left_join(
-      faculty_xlsx,
-      by = dplyr::join_by(!!cols$notfull$seminar == !!cols$admin$fcid)
-    ) |>
-    dplyr::select(!!cols$notfull$seminar, !!cols$notfull$openslots)
+  df$notfull <- faculty_xlsx |>
+    dplyr::mutate(!!cols$notfull$openslots := rowSums(is.na(result$matched.colleges))) |>
+    dplyr::select(!!cols$notfull$seminar := !!cols$admin$fcname,
+                  !!cols$notfull$openslots) |>
+    dplyr::filter(.data[[cols$notfull$openslots]] > 0)
 
   df$display <-
     df$main |>

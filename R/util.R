@@ -6,6 +6,15 @@ n_checked <- function(x) {
   if (is.null(x)) 0 else length(x)
 }
 
+path_exists <- function(path) {
+  if (file.exists(path)) {
+    path
+  } else {
+    warning("File/directory does not exist: ", path)
+    NULL
+  }
+}
+
 
 #' Last n letters
 #'

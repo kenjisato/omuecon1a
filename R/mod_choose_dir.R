@@ -1,10 +1,10 @@
 # Choose a directory ----
 
-choose_dir_ui <- function(id, face, msg, tip = NULL) {
+choose_dir_ui <- function(id, face, msg, value = NULL, tip = NULL) {
   ns <- NS(id)
 
   text_input <- shinyjs::disabled(
-    textInput(ns("txt"), label = NULL, width = "100%")
+    textInput(ns("txt"), label = NULL, value = value, width = "100%")
   )
   if (!is.null(tip)) {
     text_input <- tooltip(text_input, tip)

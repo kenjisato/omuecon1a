@@ -20,7 +20,8 @@ action_ui_rdsfile <- function(id, step) {
     p(paste0("Step ", step, " の自動生成ファイル")),
     choose_file_ui(
       ns("rds"), "選択",
-      paste0("Step ", step, " の結果データ (step", step, ".rds)")
+      paste0("Step ", step, " の結果データ (step", step, ".rds)"),
+      value = path_exists(the$cfg[[paste0("step", step, ".rds")]])
     )
   )
 }

@@ -1,0 +1,27 @@
+# Page 0
+"root-dir": {{ project_dir }}
+"admin-dir": {{ project_dir }}/Admin
+"faculty-dir": {{ project_dir }}/Faculty
+"students-dir": {{ project_dir }}/Students
+"results-dir": {{ project_dir }}/_Result
+
+# Page 1
+"faculty-list": {{ project_dir }}/Admin/faculty.xlsx
+"students-list": {{ project_dir }}/Admin/students.xlsx
+
+# Page 3
+"change-xlsx": {{ project_dir }}/Admin/change.xlsx
+"step2.rds": {{ project_dir }}/_Result/step2.rds
+
+# Page 4
+"gakuen-xlsx": {{ project_dir }}/Admin/gakuen.xlsx
+"step3.rds": {{ project_dir }}/_Result/step3.rds
+
+
+# Page Option
+slots: 10
+digits: 8
+"random-seed": 12345
+"step2-template": {{ project_dir }}/Template/step2_template.Rmd
+"step3-template": {{ project_dir }}/Template/step3_template.Rmd
+"step4-template": {{ project_dir }}/Template/step4_template.Rmd
