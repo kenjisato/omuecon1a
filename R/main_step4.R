@@ -25,11 +25,13 @@ step4_ui <- function() {
       layout_columns(
         card(
           card_header("配属一覧", class = "bg-light"),
-          DT::dataTableOutput(ns("match-result")) |> shinycssloaders::withSpinner()
+          DT::dataTableOutput(ns("match-result")) |> shinycssloaders::withSpinner(),
+          full_screen = TRUE
         ),
         card(
           card_header("空きゼミ一覧", class = "bg-light"),
-          DT::dataTableOutput(ns("open-slots")) |> shinycssloaders::withSpinner()
+          DT::dataTableOutput(ns("open-slots")) |> shinycssloaders::withSpinner(),
+          full_screen = TRUE
         ),
         col_widths = c(6, 6), height = "300px"
       )
