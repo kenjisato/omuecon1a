@@ -26,7 +26,7 @@ prep <- function(dir = format(Sys.Date(), "matching%y"), parent = NULL) {
   parent <- if (is.null(parent)) {
     choose_dir()
   } else {
-    normalizePath(parent)
+    path.expand(parent)
   }
   if (is.null(parent)) {
     stop("parent is not specified.")
