@@ -43,7 +43,7 @@ prep <- function(dir = format(Sys.Date(), "matching%y"), parent = NULL) {
   on.exit(unlink(tdir, recursive = TRUE), add = TRUE)
 
   file.copy(pkg_file("project"), tdir, recursive = TRUE)
-  file.rename(file.path(tdir, "project", "omuecon1a.Rproj"),
+  file.rename(file.path(tdir, "project", "omuecon1a_Rproj"),
               file.path(tdir, "project", xfun::with_ext(dir, "Rproj")))
 
   writeLines(
