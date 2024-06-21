@@ -23,15 +23,15 @@ choose_dir <- function(caption = "select a directory") {
 #'
 prep <- function(dir = format(Sys.Date(), "matching%y"), parent = NULL) {
 
-  parent <- if (is.null(parent)) {
-    choose_dir()
-  } else {
-    normalizePath(parent, winslash = "/")
+  if (is.null(parent)) {
+    parent <- choose_dir()
   }
+
   if (is.null(parent) || is.na(parent)) {
     stop("parent is not specified.")
   }
 
+  parent <- normalizePath(parent, winslash = "/")
   to <- file.path(parent, dir)
 
   if (dir.exists(to)) {
