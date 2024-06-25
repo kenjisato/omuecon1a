@@ -137,14 +137,22 @@ step4_action <- function(rv, input, output, session) {
       !!cols$moodle$seminar := !!cols$main$fcname
     )
 
+  .num_matched <- "num_matched"
 
   df$notfull <-
     df$main |>
     dplyr::filter(!startsWith(.data[[cols$match$student]], "*")) |>
-    dplyr::group_by(.data[[cols$main$fcname]], .data[[cols$match$seminar]]) |>
-    dplyr::summarize(!!cols$notfull$openslots := rv[["slots"]] - dplyr::n(),
-                     .groups = "drop"
-    ) |>
+    dplyr::group_by(.data[[the$cols$match$seminar]], .data[[the$cols$main$fcname]]) |>
+    dplyr::summarize(!!.num_matched := dplyr::n(), .groups = "drop") |>
+    dplyr::right_join(faculty_xlsx,
+                      dplyr::join_by(!!cols$match$seminar == !!cols$admin$fcid,
+                                     !!cols$main$fcname == !!cols$admin$fcname)) |>
+    dplyr::mutate(
+      !!cols$notfull$openslots := ifelse(is.na(.data[[.num_matched]]),
+                                         rv[["slots"]],
+                                         rv[["slots"]] - .data[[.num_matched]])) |>
+    dplyr::arrange(match(.data[[cols$match$seminar]],
+                         faculty_xlsx |> dplyr::pull(!!cols$admin$fcid))) |>
     dplyr::select(!!cols$notfull$seminar := !!cols$main$fcname,
                   !!cols$notfull$openslots) |>
     dplyr::filter(.data[[cols$notfull$openslots]] > 0)

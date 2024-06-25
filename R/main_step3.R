@@ -123,18 +123,19 @@ step3_action <- function(rv, input, output, session) {
       by = cols$match$student
     )
 
-  .stid <- rlang::sym(cols$match$student)
-  .stname <- rlang::sym(cols$admin$stname)
-  .seminar <- rlang::sym(cols$match$seminar)
-  .fcname <- rlang::sym(cols$main$fcname)
-  .openslots <- rlang::sym(cols$notfull$openslots)
+  #.stid <- rlang::sym(cols$match$student)
+  #.stname <- rlang::sym(cols$admin$stname)
+  #.seminar <- rlang::sym(cols$match$seminar)
+  #.fcname <- rlang::sym(cols$main$fcname)
+  #.openslots <- rlang::sym(cols$notfull$openslots)
 
   df <- list()
 
   df$main <-
     matching_df_chg1 |>
     dplyr::mutate(
-      !!cols$main$stid_name := paste(last_n(!!.stid, 3), !!.stname)
+      !!cols$main$stid_name := paste(last_n(.data[[cols$match$student]], 3),
+                                     .data[[cols$admin$stname]])
     ) |>
     dplyr::left_join(
       faculty_xlsx,
@@ -144,7 +145,7 @@ step3_action <- function(rv, input, output, session) {
       !!cols$main$stname := !!cols$admin$stname,
       !!cols$main$fcname := !!cols$admin$fcname
     ) |>
-    dplyr::group_by(!!.seminar) |>
+    dplyr::group_by(.data[[cols$match$seminar]]) |>
     dplyr::mutate(!!cols$main$num := dplyr::row_number()) |>
     dplyr::ungroup() |>
     dplyr::select(-!!cols$admin$gpa)
@@ -159,15 +160,25 @@ step3_action <- function(rv, input, output, session) {
     )
 
   ## 修正後の空きゼミ
+  .num_matched <- "num_matched"
 
   df$notfull <-
     df$main |>
-    dplyr::group_by(!!.fcname, !!.seminar) |>
-    dplyr::summarize(!!cols$notfull$openslots := rv[["slots"]] - dplyr::n(),
-      .groups = "drop"
-    ) |>
-    dplyr::select(!!cols$notfull$seminar := !!.fcname, !!.openslots) |>
-    dplyr::filter(!!.openslots > 0)
+    dplyr::group_by(.data[[the$cols$match$seminar]], .data[[the$cols$main$fcname]]) |>
+    dplyr::summarize(!!.num_matched := dplyr::n(), .groups = "drop") |>
+    dplyr::right_join(faculty_xlsx,
+                      dplyr::join_by(!!cols$match$seminar == !!cols$admin$fcid,
+                                     !!cols$main$fcname == !!cols$admin$fcname))  |>
+    dplyr::mutate(
+      !!cols$notfull$openslots := ifelse(is.na(.data[[.num_matched]]),
+                                         rv[["slots"]],
+                                         rv[["slots"]] - .data[[.num_matched]])) |>
+    dplyr::arrange(match(.data[[cols$match$seminar]],
+                         faculty_xlsx |> dplyr::pull(!!cols$admin$fcid))) |>
+    dplyr::select(!!cols$notfull$seminar := !!cols$main$fcname,
+                  !!cols$notfull$openslots) |>
+    dplyr::filter(.data[[cols$notfull$openslots]] > 0)
+
 
 
   ## 結果を画面表示

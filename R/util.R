@@ -7,12 +7,15 @@ n_checked <- function(x) {
 }
 
 path_exists <- function(path) {
+
+  if (is.null(path)) return(invisible())
+
   if (file.exists(path)) {
     path
   } else {
     warning("File/directory does not exist: ", path,
             immediate. = TRUE)
-    NULL
+    invisible()
   }
 }
 
@@ -49,17 +52,6 @@ integer_breaks <- function(n = 5, ...) {
 tryAlert <- function() {
 
 }
-
-parent <- function() {
-  child("bye")
-  print('hello')
-}
-
-child <- function(msg) {
-  rlang::return_from(parent.frame(1), msg)
-}
-
-
 
 
 tryRead <- function(file, msg, title = "Error!", ...) {
